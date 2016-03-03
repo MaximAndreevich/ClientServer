@@ -1,7 +1,13 @@
 package com.netcracker;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.jar.Attributes;
+import java.util.jar.JarInputStream;
+import java.util.jar.Manifest;
 
 import static java.nio.file.Files.newDirectoryStream;
 
@@ -22,6 +28,27 @@ public class JarDiscovery {
 
     }
 
+    public void jarExplore(){
+        try{
+            for(int i=0;i<jarLoc.size();i++){
+
+                InputStream inp=new FileInputStream(jarLoc.get(i).toString());
+                JarInputStream jInp=new JarInputStream(inp);
+                Manifest manifest=jInp.getManifest();
+                Attributes attr = manifest.getMainAttributes();
+                String version=attr.getValue("Version");
+                System.out.println(version);
+                
+
+
+
+
+            }
+
+        }catch (Exception e){
+            System.out.println("oops!");
+        }
+    }
 
 
     void check() {

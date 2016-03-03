@@ -61,7 +61,7 @@ class Main {
 
         if(!fileList.jarList.isEmpty()) {
             JarDiscovery jar = new JarDiscovery(way.address, fileList.jarAddressList);
-            //jar.getManifestInfo();
+            jar.jarExplore();
         }
 
 
