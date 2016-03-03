@@ -1,12 +1,8 @@
-package com.netkracker;
+package com.netcracker;
 
-import java.io.IOException;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import static java.nio.file.Files.isRegularFile;
 import static java.nio.file.Files.newDirectoryStream;
 
 /**

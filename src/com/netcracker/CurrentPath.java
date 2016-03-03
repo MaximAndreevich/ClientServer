@@ -1,4 +1,4 @@
-package com.netkracker;
+package com.netcracker;
 
 import com.sun.org.apache.xml.internal.serialize.LineSeparator;
 import javafx.scene.input.KeyCode;
@@ -43,6 +43,10 @@ public class CurrentPath {
         } catch (IOException ioe) {
             System.out.println("  ");
         }
+    }
+
+    public void SpecialPath1(){
+        this.address=Paths.get("E:\\Windows\\Documents\\NEC\\ClientServer\\ClientServer\\testJars");
     }
     public Path getPathToWork() {
         address = Paths.get("");

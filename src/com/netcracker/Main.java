@@ -1,4 +1,4 @@
-package com.netkracker;
+package com.netcracker;
 
 //import java.nio.file.Files;
 
@@ -13,8 +13,8 @@ class Main {
     public static void main(String[] args) {
         CurrentPath way= new CurrentPath();
         Scanner arrow =new Scanner(System.in);
-        System.out.println("Hello, this is test version of jar dependency checker.");
-        System.out.println("To continue choose option.\n1.Search in program folder\n2.Search in upper folder\n3.Search in custom folder\n0. Exit");
+        System.out.println("Hello, this is test version of jar dependency checker.");//Console app
+        System.out.println("To continue choose option.\n1.Search in program folder\n2.Search in upper folder\n3.Search in custom folder\n4. ../testJars\n0. Exit");
         int n=arrow.nextInt();
 
         switch (n){
@@ -24,6 +24,9 @@ class Main {
                 break;
             case 3:
                 way.getCustomPath();
+                break;
+            case 4:
+                way.SpecialPath1();
                 break;
 
             case 0:return;
@@ -54,11 +57,13 @@ class Main {
         fileList.printFilesList();
         way.printCurrentFolder();
         System.out.println(fileList.jarList.size());
-        // JarDiscovery() РЅР°Рј РЅР°РґРѕ Р°РґСЂРµСЃ Рё РёРјРµРЅР°.
+        // JarDiscovery() нам надо адрес и имена.
 
         if(!fileList.jarList.isEmpty()) {
             JarDiscovery jar = new JarDiscovery(way.address, fileList.jarAddressList);
+            //jar.getManifestInfo();
         }
+
 
 
 
@@ -98,7 +103,7 @@ class Main {
         /*
         for(int i=0; i<fList.length; i++)
         {
-            //РќСѓР¶РЅС‹ С‚РѕР»СЊРєРѕ РїР°РїРєРё РІ РјРµСЃС‚Рѕ isFile() РїРёС€РёРј isDirectory()
+            //Нужны только папки в место isFile() пишим isDirectory()
             if(fList[i].isFile())
                 System.out.println(String.valueOf(i) + " - " + fList[i].getName());
         }
