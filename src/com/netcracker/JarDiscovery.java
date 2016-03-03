@@ -1,8 +1,9 @@
 package com.netcracker;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.jar.Attributes;
@@ -18,18 +19,24 @@ public class JarDiscovery {
     private Path address;
     private ArrayList<Path> jarLoc;
     private ArrayList<String> fileList;
+    private Gson verList;
 
 
     public JarDiscovery(Path add, ArrayList<Path> files) {
         address = add;
         jarLoc = files;
-        check();
+        //check();
+        verList=new GsonBuilder().setPrettyPrinting().create();
+
 
 
     }
 
     public void jarExplore(){
+
+
         try{
+            Writer writer = new FileWriter("Output.json");
             for(int i=0;i<jarLoc.size();i++){
 
                 InputStream inp=new FileInputStream(jarLoc.get(i).toString());
@@ -37,17 +44,21 @@ public class JarDiscovery {
                 Manifest manifest=jInp.getManifest();
                 Attributes attr = manifest.getMainAttributes();
                 String version=attr.getValue("Version");
-                System.out.println(version);
-                
+                System.out.println(jarLoc.get(i).getFileName()+" "+version);
+                //String json=verList.toJson(jarLoc.get(i).getFileName()+" "+version);
+                verList.toJson(jarLoc.get(i).getFileName()+" "+version, writer);
+
 
 
 
 
             }
+            writer.close();
 
         }catch (Exception e){
             System.out.println("oops!");
         }
+
     }
 
 
