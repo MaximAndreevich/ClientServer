@@ -62,6 +62,10 @@ public class JarDiscovery {
     }
 
 
+    public Gson getJson(){
+
+        return verList;
+    }
     void check() {
         System.out.println(address);
         for (int i = 0; i < jarLoc.size(); i++) {
