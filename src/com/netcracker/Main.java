@@ -7,6 +7,7 @@ import com.netcracker.Client.Client;
 import com.netcracker.Logic.CurrentPath;
 import com.netcracker.Logic.FilesInclude;
 import com.netcracker.Logic.JarDiscovery;
+import com.sun.xml.internal.bind.marshaller.NioEscapeHandler;
 
 import java.io.IOException;
 import java.lang.String;
@@ -70,7 +71,9 @@ class Main {
         try {
 
             Client sendJson = new Client("127.0.0.1", 11111, jar.verList);
-        }catch (NullPointerException e){
+            String out=sendJson.connection(jar.verList);
+
+        }catch (IOException e){
             System.out.println("No such array");
         }
 
