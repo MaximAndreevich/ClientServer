@@ -1,4 +1,4 @@
-package com.netcracker;
+package com.netcracker.Logic;
 
 
 import java.io.IOException;

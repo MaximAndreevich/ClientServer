@@ -2,6 +2,13 @@ package com.netcracker;
 
 //import java.nio.file.Files;
 
+import com.netcracker.Additional.Delay;
+import com.netcracker.Client.Client;
+import com.netcracker.Logic.CurrentPath;
+import com.netcracker.Logic.FilesInclude;
+import com.netcracker.Logic.JarDiscovery;
+
+import java.io.IOException;
 import java.lang.String;
 import java.util.*;
 
@@ -13,6 +20,7 @@ class Main {
     public static void main(String[] args) {
         CurrentPath way= new CurrentPath();
         Scanner arrow =new Scanner(System.in);
+        JarDiscovery jar;
         System.out.println("Hello, this is test version of jar dependency checker.");//Console app
         System.out.println("To continue choose option.\n1.Search in program folder\n2.Search in upper folder\n3.Search in custom folder\n4. ../testJars\n0. Exit");
         int n=arrow.nextInt();
@@ -37,20 +45,16 @@ class Main {
         System.out.print("You're in ");
         way.printCurrentPath();
         System.out.println("Let's begin to work.");
-        try{Thread.sleep(1000);
-        }catch (InterruptedException a){}
+        Delay wait=new Delay();
+        wait.delay(1000);
         System.out.print("Folder scan");
-        try{Thread.sleep(1000);
-        }catch (InterruptedException a){}
+        wait.delay(500);
         System.out.print(".");
-        try{Thread.sleep(1000);
-        }catch (InterruptedException a){}
+        wait.delay(500);
         System.out.print(".");
-        try{Thread.sleep(1000);
-        }catch (InterruptedException a){}
+        wait.delay(500);
         System.out.print(".");
-        try{Thread.sleep(1500);
-        }catch (InterruptedException a){}
+        wait.delay(1000);
         FilesInclude fileList=new FilesInclude(way.address);
 
 
@@ -59,10 +63,18 @@ class Main {
         System.out.println(fileList.jarList.size());
         // JarDiscovery() нам надо адрес и имена.
 
-        if(!fileList.jarList.isEmpty()) {
-            JarDiscovery jar = new JarDiscovery(way.address, fileList.jarAddressList);
+        //if(!fileList.jarList.isEmpty()) {
+            jar = new JarDiscovery(way.address, fileList.jarAddressList);
             jar.jarExplore();
+        //}
+        try {
+
+            Client sendJson = new Client("127.0.0.1", 11111, jar.verList);
+        }catch (NullPointerException e){
+            System.out.println("No such array");
         }
+
+
 
 
 

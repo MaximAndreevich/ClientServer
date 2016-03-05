@@ -1,4 +1,4 @@
-package com.netcracker;
+package com.netcracker.Logic;
 
 import com.sun.org.apache.xml.internal.serialize.LineSeparator;
 import javafx.scene.input.KeyCode;

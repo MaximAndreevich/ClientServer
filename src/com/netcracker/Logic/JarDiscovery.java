@@ -1,7 +1,8 @@
-package com.netcracker;
+package com.netcracker.Logic;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import sun.invoke.empty.Empty;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -19,7 +20,8 @@ public class JarDiscovery {
     private Path address;
     private ArrayList<Path> jarLoc;
     private ArrayList<String> fileList;
-    private Gson verList;
+    public Gson verList;
+    private ArrayList<String> completeList;
 
 
     public JarDiscovery(Path add, ArrayList<Path> files) {
@@ -30,6 +32,7 @@ public class JarDiscovery {
 
 
 
+
     }
 
     public void jarExplore(){
@@ -37,22 +40,22 @@ public class JarDiscovery {
 
         try{
             Writer writer = new FileWriter("Output.json");
-            for(int i=0;i<jarLoc.size();i++){
+            completeList=new ArrayList<String>();
+            for (Path aJarLoc : jarLoc) {
 
-                InputStream inp=new FileInputStream(jarLoc.get(i).toString());
-                JarInputStream jInp=new JarInputStream(inp);
-                Manifest manifest=jInp.getManifest();
+                InputStream inp = new FileInputStream(aJarLoc.toString());
+                JarInputStream jInp = new JarInputStream(inp);
+                Manifest manifest = jInp.getManifest();
                 Attributes attr = manifest.getMainAttributes();
-                String version=attr.getValue("Version");
-                System.out.println(jarLoc.get(i).getFileName()+" "+version);
+                String version = attr.getValue("Version");
+                System.out.println(aJarLoc.getFileName() + " " + version);
                 //String json=verList.toJson(jarLoc.get(i).getFileName()+" "+version);
-                verList.toJson(jarLoc.get(i).getFileName()+" "+version, writer);
-
-
-
+                //verList.toJson(jarLoc.get(i).getFileName()+" "+version, writer);
+                completeList.add(aJarLoc.getFileName().toString() + " " + version);
 
 
             }
+            verList.toJson(completeList, writer);
             writer.close();
 
         }catch (Exception e){
@@ -62,14 +65,13 @@ public class JarDiscovery {
     }
 
 
-    public Gson getJson(){
 
-        return verList;
-    }
+
+
     void check() {
         System.out.println(address);
-        for (int i = 0; i < jarLoc.size(); i++) {
-            System.out.println(jarLoc.get(i));
+        for (Path aJarLoc : jarLoc) {
+            System.out.println(aJarLoc);
         }
 
     }
